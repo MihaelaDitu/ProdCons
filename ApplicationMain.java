@@ -4,8 +4,9 @@ import java.util.Stack;
 
 public class ApplicationMain {
 	
-	ArrayList<Thread> threadsList = new ArrayList<Thread>();
-	Stack stack = new Stack();
+	private static final int STACK_MAX_SIZE = 3;
+	private ArrayList<Thread> threadsList = new ArrayList<Thread>();
+	private Stack stack = new Stack();
 	
 
 	public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class ApplicationMain {
 
 	private void start() {
 		Thread consumer = new ConsumerThread(stack);
-		Thread producer = new ProducerThread(stack);
+		Thread producer = new ProducerThread(stack, STACK_MAX_SIZE);
 		
 		threadsList.add(producer);
 		threadsList.add(consumer);
