@@ -4,9 +4,12 @@ public class ProducerThread extends Thread {
 
 	private Stack<IProduct> stack;
 	private IProduct product;
+	private int stackMaxSize;
 
-	public ProducerThread(Stack stack) {
+	public ProducerThread(Stack<IProduct> stack, int stackMaxSize) {
+		super();
 		this.stack = stack;
+		this.stackMaxSize = stackMaxSize;
 	}
 	
 	@Override
@@ -15,7 +18,7 @@ public class ProducerThread extends Thread {
 	
 			synchronized(stack){
 				try {
-					while(stack.size() == 5) {
+					while(stack.size() == stackMaxSize) {
 						System.out.println("Stack is full");
 						stack.wait();
 					}
@@ -36,6 +39,7 @@ public class ProducerThread extends Thread {
 			}
 
 	}
+
 
 	private synchronized void produceProduct() {
 		stack.push(new Product());
