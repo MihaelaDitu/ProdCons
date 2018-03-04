@@ -27,9 +27,6 @@ public class ConsumerThread extends Thread {
 						
 						e.printStackTrace();
 					}
-					
-				
-				
 				consumeProduct();
 			}
 				try {
@@ -41,8 +38,6 @@ public class ConsumerThread extends Thread {
 			}
 
 		}
-
-	
 
 	private synchronized void consumeProduct() {
 		product = (IProduct) stack.pop();

@@ -6,4 +6,9 @@ public class Product implements IProduct {
 		System.out.println("Product consumed");
 	}
 
+	@Override
+	public void produce() {
+		System.out.println("Product produced");
+	}
+
 }
