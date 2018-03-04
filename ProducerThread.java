@@ -40,10 +40,10 @@ public class ProducerThread extends Thread {
 
 	}
 
-
 	private synchronized void produceProduct() {
-		stack.push(new Product());
-		System.out.println("Product produced");
+		IProduct newProduct = new Product();
+		stack.push(newProduct);
+		newProduct.produce();
 		stack.notify();
 		
 	}
