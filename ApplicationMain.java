@@ -15,16 +15,23 @@ public class ApplicationMain {
 	}
 
 	private void start() {
-		Thread consumer = new ConsumerThread(stack);
 		Thread producer = new ProducerThread(stack, STACK_MAX_SIZE);
+		Thread consumer = new ConsumerThread(stack);
 		
 		threadsList.add(producer);
 		threadsList.add(consumer);
+		
 		startThreads();
 		joinThreads();
 
 	}
 
+	private void startThreads() {
+		for (Thread thread : threadsList) {
+			thread.start();
+		}
+	}
+	
 	private void joinThreads() {
 		
 		for (Thread thread : threadsList) {
@@ -34,17 +41,6 @@ public class ApplicationMain {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}	
 	}
-
-	private void startThreads() {
-		
-		for (Thread thread : threadsList) {
-			thread.start();
-		}
-		
-
-	}
-
 }

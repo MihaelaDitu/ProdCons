@@ -16,19 +16,19 @@ public class ConsumerThread extends Thread {
 	
 		while(true) {
 			synchronized(stack){
-				try {
 					while(stack.isEmpty()) {
 						System.out.println("Stack is empty");
-						stack.wait();
-						
-					}
-				}catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						
-						e.printStackTrace();
-					}
-				consumeProduct();
+						try {
+							stack.wait();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}	
+				
+				popProduct();
 			}
+			consumeProduct();
 				try {
 					sleep(5000);
 				} catch (InterruptedException e) {
@@ -39,10 +39,14 @@ public class ConsumerThread extends Thread {
 
 		}
 
-	private synchronized void consumeProduct() {
+	private void popProduct() {
 		product = (IProduct) stack.pop();
-		product.consume();
 		stack.notify();
 	}
+
+	public void consumeProduct() {
+		System.out.println("Product consumed");
+	}
+
 		
 }
